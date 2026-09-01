@@ -12,40 +12,40 @@ const wifeName = "MY BEAUTIFUL WIFE";
 const videos = [
 
   {
-    title: "Making Way Less Sad",
+    title: "Way Less Sad",
     subtitle: "Let's start the night together ❤️",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Making_of_Way_Less_Sad_Live_from_the_Maybe_Man_Tour_1"
   },
 
   {
     title: "Weak",
     subtitle: "I know this one is special ✨",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Making_of_Weak_Live_From_the_OKO_Tour_-_AJR_1080p_1"
   },
 
   {
     title: "Come Hang Out",
     subtitle: "Come hang out with me ❤️",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-__Come_Hang_Out__Live_from_JITV_HQ_in_Los_Angeles_CA_2017_JAMINTHEVAN"
   },
 
   {
     title: "Steve's Going to London",
     subtitle: "Take me back to London 🎤",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_Live_-_Steve_s_Going_to_London_Shoreline_Amphitheatre_Mountain_view_CA_2025-07-20"
   },
 
   {
     title: "Bang!",
     subtitle: "BANG! 💥",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Making_of_Bang_Bang_Live_From_One_Spectacular_Night_-_AJR_1080p_1"
   },
 
 
   {
     title: "Karma",
     subtitle: "My Favorite :)",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Karma_Live_From_One_Spectacular_Night"
   },
 
   {
@@ -56,15 +56,15 @@ const videos = [
 
   {
     title: "100 Bad Days",
-    subtitle: "Here's to all the memories ❤️",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    subtitle: "So GOOOOOOOOD",
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Making_of_100_Bad_Days_Live_from_Somewhere_in_the_Sky_1
   },
   
   {
     title: "Dear Winter",
     subtitle: "This one is for you ❤️",
     // NOTE: previously this used the same filename as 100 Bad Days; replace with the correct file name.
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/The_Trick_Dear_Winter_Mashup_-_AJR_Live_Barricade_View_Boston_5_20_22"
   },
   
   {
@@ -83,13 +83,13 @@ const videos = [
   {
     title: "Inertia",
     subtitle: "A little acoustic moment ❤️",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Inertia_Acoustic"
   },
   
   {
     title: "Finale",
     subtitle: "Hope you enjoyed the show ❤️",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_2085_Finale_Live_from_the_Maybe_Man_Tour"
   }
 
 ];
