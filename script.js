@@ -57,7 +57,7 @@ const videos = [
   {
     title: "100 Bad Days",
     subtitle: "So GOOOOOOOOD",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Making_of_100_Bad_Days_Live_from_Somewhere_in_the_Sky_1"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Burn_The_House_Down_Live_From_One_Spectacular_Night"
   },
   
   {
