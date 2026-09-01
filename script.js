@@ -10,28 +10,84 @@ const wifeName = "MY BEAUTIFUL WIFE";
 // Change these filenames to EXACTLY match your .mp4 files.
 // Example: "Bang Bang - Live.mp4"
 const videos = [
-  {
-    title: "AJR LIVE — SONG 1",
-    subtitle: "This one's just for you ❤️",
-    file: "video1.mp4"
-  },
-  {
-    title: "AJR LIVE — SONG 2",
-    subtitle: "Keep dancing ✨",
-    file: "video2.mp4"
-  },
-  {
-    title: "AJR LIVE — SONG 3",
-    subtitle: "Sing it with them ❤️",
-    file: "video3.mp4"
-  },
-  {
-    title: "AJR LIVE — FINAL SONG",
-    subtitle: "One last song for my favorite person",
-    file: "video4.mp4"
-  }
-];
 
+  {
+    title: "Making Way Less Sad",
+    subtitle: "Let's start the night together ❤️",
+    file: "AJR - Making of Way Less Sad (Live from the Maybe Man Tour).mp4"
+  },
+
+  {
+    title: "Weak",
+    subtitle: "I know this one is special ✨",
+    file: "AJR - Making of Weak (Live From the OKO Tour) - AJR (1080p) (1).mp4"
+  },
+
+  {
+    title: "Come Hang Out",
+    subtitle: "Come hang out with me ❤️",
+    file: "AJR - _Come Hang Out_ (Live from JTV HQ in Los Angeles, CA 2017) #JAMIN THEVAN.mp4"
+  },
+
+  {
+    title: "Steve's Going to London",
+    subtitle: "Take me back to London 🎤",
+    file: "AJR Live - Steve's Going to London (Shoreline Amphitheatre, Mountain view, CA 2025-07-20).mp4"
+  },
+
+  {
+    title: "Bang!",
+    subtitle: "BANG! 💥",
+    file: "AJR - Making of Bang! Bang! (Live From One Spectacular Night) - AJR (1080p) (1).mp4"
+  },
+
+
+  {
+    title: "Karma",
+    subtitle: "My Favorite :)",
+    file: "AJR - Karma (Live From One Spectacular Night).mp4"
+  },
+
+  {
+    title: "Burn The House Down",
+    subtitle: "LET'S LIGHT THIS PLACE UP 🔥",
+    file: "AJR - Burn The House Down (Live From One Spectacular Night).mp4"
+  },
+
+  {
+    title: "100 Bad Days",
+    subtitle: "Here's to all the memories ❤️",
+    file: "AJR - Making of 100 Bad Days (Live from Somewhere in the Sky) (1).mp4"
+  },
+  {
+    title: "Dear Winter",
+    subtitle: "This one is for you ❤️",
+    file: "AJR - Making of 100 Bad Days (Live from Somewhere in the Sky) (1).mp4"
+  },
+  {
+    title: "Sober Up",
+    subtitle: "One of your favorites 🎸",
+    file: "AJR & Rivers Cuomo - Sober Up (Live in LA).mp4"
+  },
+
+  {
+    title: "World's Smallest Violin",
+    subtitle: "Let's goooo 🎻",
+    file: "https://res.cloudinary.com/YOUR-CLOUD/video/upload/AJR/World's-Smallest-Violin"
+  },
+
+  {
+    title: "Inertia",
+    subtitle: "A little acoustic moment ❤️",
+    file: "AJR - Inertia (Acoustic).mp4"
+  },
+    {
+    title: "Finale",
+    subtitle: "Hope you enjoyed the show ❤️",
+    file: "AJR - 2085 Finale (Live from the Maybe Man Tour).mp4"
+  },
+
+];
 let currentIndex = 0;
 let countdownTimer = null;
 
