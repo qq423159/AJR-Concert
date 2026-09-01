@@ -14,63 +14,63 @@ const videos = [
   {
     title: "Making Way Less Sad",
     subtitle: "Let's start the night together ❤️",
-    file: "AJR - Making of Way Less Sad (Live from the Maybe Man Tour).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
 
   {
     title: "Weak",
     subtitle: "I know this one is special ✨",
-    file: "AJR - Making of Weak (Live From the OKO Tour) - AJR (1080p) (1).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
 
   {
     title: "Come Hang Out",
     subtitle: "Come hang out with me ❤️",
-    file: "AJR - _Come Hang Out_ (Live from JTV HQ in Los Angeles, CA 2017) #JAMIN THEVAN.mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
 
   {
     title: "Steve's Going to London",
     subtitle: "Take me back to London 🎤",
-    file: "AJR Live - Steve's Going to London (Shoreline Amphitheatre, Mountain view, CA 2025-07-20).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
 
   {
     title: "Bang!",
     subtitle: "BANG! 💥",
-    file: "AJR - Making of Bang! Bang! (Live From One Spectacular Night) - AJR (1080p) (1).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
 
 
   {
     title: "Karma",
     subtitle: "My Favorite :)",
-    file: "AJR - Karma (Live From One Spectacular Night).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
 
   {
     title: "Burn The House Down",
     subtitle: "LET'S LIGHT THIS PLACE UP 🔥",
-    file: "AJR - Burn The House Down (Live From One Spectacular Night).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Burn_The_House_Down_Live_From_One_Spectacular_Night"
   },
 
   {
     title: "100 Bad Days",
     subtitle: "Here's to all the memories ❤️",
-    file: "AJR - Making of 100 Bad Days (Live from Somewhere in the Sky) (1).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
   
   {
     title: "Dear Winter",
     subtitle: "This one is for you ❤️",
     // NOTE: previously this used the same filename as 100 Bad Days; replace with the correct file name.
-    file: "AJR - Dear Winter (Live).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
   
   {
     title: "Sober Up",
     subtitle: "One of your favorites 🎸",
-    file: "AJR & Rivers Cuomo - Sober Up (Live in LA).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_Rivers_Cuomo_-_Sober_Up_Live_in_LA"
   },
 
   {
@@ -83,13 +83,13 @@ const videos = [
   {
     title: "Inertia",
     subtitle: "A little acoustic moment ❤️",
-    file: "AJR - Inertia (Acoustic).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   },
   
   {
     title: "Finale",
     subtitle: "Hope you enjoyed the show ❤️",
-    file: "AJR - 2085 Finale (Live from the Maybe Man Tour).mp4"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/"
   }
 
 ];
