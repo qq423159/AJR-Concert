@@ -73,7 +73,7 @@ const videos = [
   {
     title: "World's Smallest Violin",
     subtitle: "Let's goooo 🎻",
-    file: "https://res.cloudinary.com/YOUR-CLOUD/video/upload/AJR/World's-Smallest-Violin"
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Worlds_Smallest_Violin_Live_from_the_OKO_Tour_-_AJR_1080p"
   },
 
   {
