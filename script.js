@@ -63,7 +63,8 @@ const videos = [
   {
     title: "Dear Winter",
     subtitle: "This one is for you ❤️",
-    file: "AJR - Making of 100 Bad Days (Live from Somewhere in the Sky) (1).mp4"
+    // NOTE: previously this used the same filename as 100 Bad Days; replace with the correct file name.
+    file: "AJR - Dear Winter (Live).mp4"
   },
   
   {
@@ -75,7 +76,8 @@ const videos = [
   {
     title: "World's Smallest Violin",
     subtitle: "Let's goooo 🎻",
-    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Worlds_Smallest_Violin_Live_from_the_OKO_Tour_-_AJR_1080p"
+    // This was previously a cloudinary URL missing an explicit extension — confirm the URL or replace with a local file name.
+    file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_Worlds_Smallest_Violin_Live_from_the_OKO_Tour_-_AJR_1080p.mp4"
   },
 
   {
@@ -84,40 +86,52 @@ const videos = [
     file: "AJR - Inertia (Acoustic).mp4"
   },
   
-    {
+  {
     title: "Finale",
     subtitle: "Hope you enjoyed the show ❤️",
     file: "AJR - 2085 Finale (Live from the Maybe Man Tour).mp4"
   }
 
 ];
+
 let currentIndex = 0;
 let countdownTimer = null;
 
-const ticketScreen = document.getElementById("ticketScreen");
-const countdownScreen = document.getElementById("countdownScreen");
-const concert = document.getElementById("concert");
-const countdownEl = document.getElementById("countdown");
-const enterBtn = document.getElementById("enterBtn");
-const startShowBtn = document.getElementById("startShowBtn");
-const messageOverlay = document.getElementById("messageOverlay");
+// Safe element getter to avoid immediate crashes if an element is missing.
+function $id(id) {
+  const el = document.getElementById(id);
+  if (!el) console.warn(`Missing element with id="${id}" — some features may not work.`);
+  return el;
+}
 
-const videoPlayer = document.getElementById("videoPlayer");
-const playBtn = document.getElementById("playBtn");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const progress = document.getElementById("progress");
-const volume = document.getElementById("volume");
-const currentTimeEl = document.getElementById("currentTime");
-const durationEl = document.getElementById("duration");
+const ticketScreen = $id("ticketScreen");
+const countdownScreen = $id("countdownScreen");
+const concert = $id("concert");
+const countdownEl = $id("countdown");
+const enterBtn = $id("enterBtn");
+const startShowBtn = $id("startShowBtn");
+const messageOverlay = $id("messageOverlay");
 
-const songTitle = document.getElementById("songTitle");
-const songSubtitle = document.getElementById("songSubtitle");
-const setlistItems = document.getElementById("setlistItems");
+const videoPlayer = $id("videoPlayer");
+const playBtn = $id("playBtn");
+const prevBtn = $id("prevBtn");
+const nextBtn = $id("nextBtn");
+const progress = $id("progress");
+const volume = $id("volume");
+const currentTimeEl = $id("currentTime");
+const durationEl = $id("duration");
 
-const encore = document.getElementById("encore");
-const encoreBtn = document.getElementById("encoreBtn");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
+const songTitle = $id("songTitle");
+const songSubtitle = $id("songSubtitle");
+const setlistItems = $id("setlistItems");
+
+const encore = $id("encore");
+const encoreBtn = $id("encoreBtn");
+const fullscreenBtn = $id("fullscreenBtn");
+
+// Fireworks canvas (may be missing on some pages)
+const canvas = $id("fireworks");
+const ctx = canvas ? canvas.getContext && canvas.getContext("2d") : null;
 
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -127,6 +141,7 @@ function formatTime(seconds) {
 }
 
 function buildSetlist() {
+  if (!setlistItems) return;
   setlistItems.innerHTML = "";
 
   videos.forEach((video, index) => {
@@ -142,47 +157,76 @@ function buildSetlist() {
 }
 
 function updateSetlist() {
+  if (!setlistItems) return;
   [...setlistItems.children].forEach((item, index) => {
     item.classList.toggle("active", index === currentIndex);
   });
 }
 
+function isValidSource(src) {
+  return typeof src === "string" && src.trim().length > 0;
+}
+
+function showMessage(text) {
+  if (messageOverlay) {
+    messageOverlay.style.display = "flex";
+    // If there is a child message area, show text there; otherwise log:
+    const msgEl = messageOverlay.querySelector(".message-text");
+    if (msgEl) msgEl.textContent = text;
+  }
+  console.warn(text);
+}
+
 function loadVideo(index) {
-  if (!videos.length) return;
+  if (!videos.length || !videoPlayer) return;
 
   currentIndex = (index + videos.length) % videos.length;
-
   const selected = videos[currentIndex];
+
+  if (!selected || !isValidSource(selected.file)) {
+    showMessage("Video file name/URL missing for this track. Please update the setlist.");
+    return;
+  }
+
+  // If the source looks like a URL without extension, that's often unsupported — still try, but warn.
+  if (/^https?:\/\/.+(?!\.mp4$)/i.test(selected.file) && !selected.file.toLowerCase().endsWith(".mp4")) {
+    console.warn("Remote URL may be missing an explicit .mp4 extension — confirm the URL is a direct video file.");
+  }
 
   videoPlayer.src = selected.file;
   videoPlayer.load();
 
-  songTitle.textContent = selected.title;
-  songSubtitle.textContent = selected.subtitle;
+  if (songTitle) songTitle.textContent = selected.title;
+  if (songSubtitle) songSubtitle.textContent = selected.subtitle;
 
   updateSetlist();
 
-  progress.value = 0;
-  currentTimeEl.textContent = "0:00";
-  durationEl.textContent = "0:00";
+  if (progress) progress.value = 0;
+  if (currentTimeEl) currentTimeEl.textContent = "0:00";
+  if (durationEl) durationEl.textContent = "0:00";
 }
 
 async function playVideo() {
+  if (!videoPlayer) return;
   try {
     await videoPlayer.play();
-    playBtn.textContent = "❚❚";
+    if (playBtn) playBtn.textContent = "❚❚";
   } catch (error) {
-    // Browser blocked playback. The user can press play.
-    playBtn.textContent = "▶";
+    // Browser blocked playback or autoplay prevented.
+    if (playBtn) playBtn.textContent = "▶";
+    console.warn("Playback was blocked or failed:", error);
+    showMessage("Playback blocked by browser. Press play to start the video.");
   }
 }
 
 function pauseVideo() {
+  if (!videoPlayer) return;
   videoPlayer.pause();
-  playBtn.textContent = "▶";
+  if (playBtn) playBtn.textContent = "▶";
 }
 
 function togglePlay() {
+  if (!videoPlayer) return;
   if (videoPlayer.paused) {
     playVideo();
   } else {
@@ -191,6 +235,8 @@ function togglePlay() {
 }
 
 function nextVideo() {
+  if (!videos.length || !videoPlayer) return;
+
   if (currentIndex >= videos.length - 1) {
     videoPlayer.pause();
     showEncore();
@@ -202,106 +248,127 @@ function nextVideo() {
 }
 
 function previousVideo() {
+  if (!videoPlayer) return;
   loadVideo(currentIndex - 1);
   playVideo();
 }
 
 function showEncore() {
-  encore.classList.add("active");
+  if (encore) encore.classList.add("active");
   launchFireworks();
 }
 
 function hideEncore() {
-  encore.classList.remove("active");
+  if (encore) encore.classList.remove("active");
+  stopFireworks();
 }
 
 function startCountdown() {
-  ticketScreen.classList.remove("active");
-  countdownScreen.classList.add("active");
+  if (ticketScreen) ticketScreen.classList.remove("active");
+  if (countdownScreen) countdownScreen.classList.add("active");
 
   let number = 3;
-  countdownEl.textContent = number;
+  if (countdownEl) countdownEl.textContent = number;
 
   countdownTimer = setInterval(() => {
     number--;
 
     if (number > 0) {
-      countdownEl.textContent = number;
+      if (countdownEl) countdownEl.textContent = number;
     } else {
       clearInterval(countdownTimer);
-      countdownEl.textContent = "♥";
+      if (countdownEl) countdownEl.textContent = "♥";
 
       setTimeout(() => {
-        countdownScreen.classList.remove("active");
-        concert.classList.add("active");
-        messageOverlay.style.display = "flex";
+        if (countdownScreen) countdownScreen.classList.remove("active");
+        if (concert) concert.classList.add("active");
+        if (messageOverlay) messageOverlay.style.display = "flex";
         loadVideo(0);
       }, 900);
     }
   }, 1000);
 }
 
-enterBtn.addEventListener("click", startCountdown);
+if (enterBtn) enterBtn.addEventListener("click", startCountdown);
 
-startShowBtn.addEventListener("click", () => {
-  messageOverlay.style.display = "none";
-  loadVideo(0);
-  playVideo();
-});
+if (startShowBtn) {
+  startShowBtn.addEventListener("click", () => {
+    if (messageOverlay) messageOverlay.style.display = "none";
+    loadVideo(0);
+    playVideo();
+  });
+}
 
-playBtn.addEventListener("click", togglePlay);
-nextBtn.addEventListener("click", nextVideo);
-prevBtn.addEventListener("click", previousVideo);
+if (playBtn) playBtn.addEventListener("click", togglePlay);
+if (nextBtn) nextBtn.addEventListener("click", nextVideo);
+if (prevBtn) prevBtn.addEventListener("click", previousVideo);
 
-videoPlayer.addEventListener("play", () => {
-  playBtn.textContent = "❚❚";
-});
+if (videoPlayer) {
+  videoPlayer.addEventListener("play", () => {
+    if (playBtn) playBtn.textContent = "❚❚";
+  });
 
-videoPlayer.addEventListener("pause", () => {
-  playBtn.textContent = "▶";
-});
+  videoPlayer.addEventListener("pause", () => {
+    if (playBtn) playBtn.textContent = "▶";
+  });
 
-videoPlayer.addEventListener("loadedmetadata", () => {
-  durationEl.textContent = formatTime(videoPlayer.duration);
-});
+  videoPlayer.addEventListener("loadedmetadata", () => {
+    if (durationEl) durationEl.textContent = formatTime(videoPlayer.duration);
+  });
 
-videoPlayer.addEventListener("timeupdate", () => {
-  if (videoPlayer.duration) {
-    progress.value = (videoPlayer.currentTime / videoPlayer.duration) * 100;
-  }
-
-  currentTimeEl.textContent = formatTime(videoPlayer.currentTime);
-});
-
-progress.addEventListener("input", () => {
-  if (videoPlayer.duration) {
-    videoPlayer.currentTime =
-      (Number(progress.value) / 100) * videoPlayer.duration;
-  }
-});
-
-volume.addEventListener("input", () => {
-  videoPlayer.volume = Number(volume.value);
-});
-
-videoPlayer.addEventListener("ended", nextVideo);
-
-fullscreenBtn.addEventListener("click", async () => {
-  try {
-    if (!document.fullscreenElement) {
-      await document.documentElement.requestFullscreen();
-      fullscreenBtn.textContent = "EXIT FULLSCREEN";
-    } else {
-      await document.exitFullscreen();
-      fullscreenBtn.textContent = "FULLSCREEN";
+  videoPlayer.addEventListener("timeupdate", () => {
+    if (videoPlayer.duration && progress) {
+      progress.value = (videoPlayer.currentTime / videoPlayer.duration) * 100;
     }
-  } catch (error) {
-    console.log("Fullscreen unavailable.");
+
+    if (currentTimeEl) currentTimeEl.textContent = formatTime(videoPlayer.currentTime);
+  });
+
+  if (progress) {
+    progress.addEventListener("input", () => {
+      if (videoPlayer.duration) {
+        videoPlayer.currentTime =
+          (Number(progress.value) / 100) * videoPlayer.duration;
+      }
+    });
   }
-});
+
+  if (volume) {
+    volume.addEventListener("input", () => {
+      videoPlayer.volume = Number(volume.value);
+    });
+  }
+
+  videoPlayer.addEventListener("ended", nextVideo);
+
+  // Better reporting when the video source fails to load or decode.
+  videoPlayer.addEventListener("error", (e) => {
+    const code = videoPlayer.error ? videoPlayer.error.code : "unknown";
+    console.error("Video playback error", code, e);
+    showMessage("Couldn't load this video. Check the filename/URL and try again.");
+  });
+}
+
+if (fullscreenBtn) {
+  fullscreenBtn.addEventListener("click", async () => {
+    try {
+      if (!document.fullscreenElement) {
+        // Prefer concert element if it exists, else fall back to documentElement.
+        const target = concert || document.documentElement;
+        await (target.requestFullscreen ? target.requestFullscreen() : document.documentElement.requestFullscreen());
+        fullscreenBtn.textContent = "EXIT FULLSCREEN";
+      } else {
+        await document.exitFullscreen();
+        fullscreenBtn.textContent = "FULLSCREEN";
+      }
+    } catch (error) {
+      console.log("Fullscreen unavailable.", error);
+    }
+  });
+}
 
 document.addEventListener("keydown", (event) => {
-  if (!concert.classList.contains("active")) return;
+  if (!concert || !concert.classList.contains("active")) return;
 
   if (event.code === "Space") {
     event.preventDefault();
@@ -318,25 +385,29 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("fullscreenchange", () => {
-  fullscreenBtn.textContent =
-    document.fullscreenElement ? "EXIT FULLSCREEN" : "FULLSCREEN";
+  if (fullscreenBtn) {
+    fullscreenBtn.textContent =
+      document.fullscreenElement ? "EXIT FULLSCREEN" : "FULLSCREEN";
+  }
 });
 
 // Simple fireworks effect for the encore.
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
 let fireworks = [];
 let fireworksAnimation = null;
 
 function resizeCanvas() {
+  if (!canvas || !ctx) return;
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
 
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
+if (window) {
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+}
 
 function makeFirework() {
+  if (!canvas) return;
   const x = Math.random() * canvas.width;
   const y = Math.random() * canvas.height * 0.55 + 50;
   const particles = [];
@@ -358,6 +429,7 @@ function makeFirework() {
 }
 
 function animateFireworks() {
+  if (!ctx || !canvas) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   fireworks.forEach((particles) => {
@@ -383,6 +455,7 @@ function animateFireworks() {
 }
 
 function launchFireworks() {
+  if (!canvas || !ctx) return;
   if (!fireworksAnimation) {
     animateFireworks();
   }
@@ -398,14 +471,27 @@ function launchFireworks() {
   }, 280);
 }
 
-encoreBtn.addEventListener("click", () => {
-  hideEncore();
+function stopFireworks() {
+  if (fireworksAnimation) {
+    cancelAnimationFrame(fireworksAnimation);
+    fireworksAnimation = null;
+  }
+  fireworks = [];
+  if (ctx && canvas) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
 
-  // Replay the first video for the encore.
-  loadVideo(0);
-  playVideo();
-});
+if (encoreBtn) {
+  encoreBtn.addEventListener("click", () => {
+    hideEncore();
+
+    // Replay the first video for the encore.
+    loadVideo(0);
+    playVideo();
+  });
+}
 
 buildSetlist();
 loadVideo(0);
-videoPlayer.volume = 1;
+if (videoPlayer) videoPlayer.volume = 1;
