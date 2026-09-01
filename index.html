@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJR — One Night Only ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =========================
+       TICKET / ENTRANCE
+  ========================== -->
+  <section id="ticketScreen" class="screen active">
+    <div class="ticket-wrap">
+      <div class="ticket">
+        <div class="ticket-main">
+          <div class="ticket-small">ONE NIGHT ONLY</div>
+          <h1>AJR</h1>
+          <h2>LIVE EXPERIENCE</h2>
+          <div class="ticket-divider"></div>
+          <p class="ticket-for">A PRIVATE SHOW FOR</p>
+          <p class="wife-name">MY BEAUTIFUL WIFE ❤️</p>
+          <p class="venue">THE LOVE ARENA</p>
+          <div class="ticket-details">
+            <span>VIP</span>
+            <span>ROW ∞</span>
+            <span>SEAT ❤️</span>
+          </div>
+        </div>
+        <div class="ticket-stub">
+          <div>AJR</div>
+          <div>VIP</div>
+          <div>♥</div>
+        </div>
+      </div>
+
+      <button id="enterBtn" class="primary-btn">ENTER THE CONCERT →</button>
+    </div>
+  </section>
+
+  <!-- =========================
+       COUNTDOWN
+  ========================== -->
+  <section id="countdownScreen" class="screen">
+    <div class="countdown-content">
+      <div class="venue-name">THE LOVE ARENA</div>
+      <div id="countdown" class="countdown">3</div>
+      <p>THE LIGHTS ARE GOING DOWN...</p>
+    </div>
+  </section>
+
+  <!-- =========================
+       CONCERT STAGE
+  ========================== -->
+  <main id="concert" class="concert">
+
+    <!-- Backdrop -->
+    <div class="sky"></div>
+    <div class="stars"></div>
+
+    <!-- Moving beams -->
+    <div class="beam beam-1"></div>
+    <div class="beam beam-2"></div>
+    <div class="beam beam-3"></div>
+    <div class="beam beam-4"></div>
+    <div class="beam beam-5"></div>
+    <div class="beam beam-6"></div>
+
+    <!-- Giant stage backdrop -->
+    <div class="stage-backdrop">
+      <div class="backdrop-text">AJR</div>
+      <div class="backdrop-subtitle">ONE NIGHT ONLY</div>
+    </div>
+
+    <!-- Hanging light bars -->
+    <div class="hanging-lights left-lights">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hanging-lights right-lights">
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- Main stage -->
+    <section class="stage">
+
+      <!-- Truss -->
+      <div class="truss top-truss">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+
+      <!-- Side towers -->
+      <div class="tower tower-left">
+        <div class="tower-light"></div>
+        <div class="tower-light"></div>
+        <div class="tower-light"></div>
+        <div class="tower-light"></div>
+      </div>
+
+      <div class="tower tower-right">
+        <div class="tower-light"></div>
+        <div class="tower-light"></div>
+        <div class="tower-light"></div>
+        <div class="tower-light"></div>
+      </div>
+
+      <!-- Actual live-performance video, presented as a stage screen -->
+      <div class="stage-video-frame">
+        <div class="screen-glow"></div>
+        <video
+          id="videoPlayer"
+          playsinline
+          preload="metadata"
+          poster=""
+        ></video>
+        <div class="video-vignette"></div>
+        <div class="live-badge">● LIVE</div>
+      </div>
+
+      <!-- Stage floor -->
+      <div class="stage-floor">
+        <div class="floor-strip floor-strip-1"></div>
+        <div class="floor-strip floor-strip-2"></div>
+        <div class="floor-strip floor-strip-3"></div>
+        <div class="floor-reflection"></div>
+      </div>
+
+      <!-- Stage props -->
+      <div class="speaker speaker-left"></div>
+      <div class="speaker speaker-right"></div>
+      <div class="amp amp-left"></div>
+      <div class="amp amp-right"></div>
+
+      <!-- Mic stands -->
+      <div class="mic-stand mic-left">
+        <div class="mic"></div>
+      </div>
+      <div class="mic-stand mic-right">
+        <div class="mic"></div>
+      </div>
+
+      <!-- Fog -->
+      <div class="fog fog-1"></div>
+      <div class="fog fog-2"></div>
+      <div class="fog fog-3"></div>
+
+      <!-- Front crowd -->
+      <div class="crowd">
+        <div class="person p1"></div>
+        <div class="person p2"></div>
+        <div class="person p3"></div>
+        <div class="person p4"></div>
+        <div class="person p5"></div>
+        <div class="person p6"></div>
+        <div class="person p7"></div>
+        <div class="person p8"></div>
+        <div class="person p9"></div>
+        <div class="person p10"></div>
+        <div class="person p11"></div>
+        <div class="person p12"></div>
+      </div>
+
+    </section>
+
+    <!-- =========================
+         CONCERT HUD
+    ========================== -->
+    <header class="concert-header">
+      <div class="brand">AJR</div>
+      <div class="show-title">ONE NIGHT ONLY <span>♥</span></div>
+      <button id="fullscreenBtn" class="small-btn">FULLSCREEN</button>
+    </header>
+
+    <section class="song-info">
+      <div class="now-playing">NOW PLAYING</div>
+      <h1 id="songTitle">AJR LIVE</h1>
+      <p id="songSubtitle">This show is just for you ❤️</p>
+    </section>
+
+    <!-- Controls -->
+    <section class="controls">
+      <button id="prevBtn" class="control-btn">◀</button>
+      <button id="playBtn" class="play-btn">▶</button>
+      <button id="nextBtn" class="control-btn">▶</button>
+
+      <div class="progress-area">
+        <span id="currentTime">0:00</span>
+        <input id="progress" type="range" min="0" max="100" value="0">
+        <span id="duration">0:00</span>
+      </div>
+
+      <div class="volume-area">
+        <span>🔊</span>
+        <input id="volume" type="range" min="0" max="1" step="0.01" value="1">
+      </div>
+    </section>
+
+    <!-- Setlist -->
+    <aside class="setlist">
+      <div class="setlist-title">TONIGHT'S SETLIST</div>
+      <div id="setlistItems"></div>
+    </aside>
+
+    <!-- Personal message -->
+    <section id="messageOverlay" class="message-overlay">
+      <div class="message-card">
+        <div class="message-eyebrow">FROM THE STAGE, JUST FOR YOU</div>
+        <h2>Hey beautiful ❤️</h2>
+        <p>
+          I know you couldn't make it to the concert, so I brought the
+          concert to you.
+        </p>
+        <p>
+          Turn the volume up, sit back, and enjoy your very own AJR show.
+        </p>
+        <button id="startShowBtn" class="primary-btn">LET'S GO ❤️</button>
+      </div>
+    </section>
+
+    <!-- Encore -->
+    <section id="encore" class="encore">
+      <div class="encore-content">
+        <div class="encore-small">THE CROWD IS STILL SCREAMING</div>
+        <h1>ENCORE</h1>
+        <p>ONE MORE FOR YOU ❤️</p>
+        <button id="encoreBtn" class="primary-btn">BRING THEM BACK →</button>
+      </div>
+    </section>
+
+    <canvas id="fireworks"></canvas>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
