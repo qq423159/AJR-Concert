@@ -90,7 +90,7 @@ const videos = [
     title: "Finale",
     subtitle: "Hope you enjoyed the show ❤️",
     file: "https://res.cloudinary.com/fa50m0pf/video/upload/AJR_-_2085_Finale_Live_from_the_Maybe_Man_Tour"
-  },
+  }
 
 ];
 let currentIndex = 0;
