@@ -59,11 +59,13 @@ const videos = [
     subtitle: "Here's to all the memories ❤️",
     file: "AJR - Making of 100 Bad Days (Live from Somewhere in the Sky) (1).mp4"
   },
+  
   {
     title: "Dear Winter",
     subtitle: "This one is for you ❤️",
     file: "AJR - Making of 100 Bad Days (Live from Somewhere in the Sky) (1).mp4"
   },
+  
   {
     title: "Sober Up",
     subtitle: "One of your favorites 🎸",
@@ -81,11 +83,12 @@ const videos = [
     subtitle: "A little acoustic moment ❤️",
     file: "AJR - Inertia (Acoustic).mp4"
   },
+  
     {
     title: "Finale",
     subtitle: "Hope you enjoyed the show ❤️",
     file: "AJR - 2085 Finale (Live from the Maybe Man Tour).mp4"
-  },
+  }
 
 ];
 let currentIndex = 0;
